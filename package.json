@@ -8,7 +8,8 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate"
+    "generate": "nuxt generate",
+    "generate:sub": "cross-env USE_SUBFOLDER=true nuxt generate"
   },
   "dependencies": {
     "@tensorflow/tfjs": "^1.7.2",

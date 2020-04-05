@@ -1,4 +1,14 @@
+const routerBase =
+  process.env.USE_SUBFOLDER === "true"
+    ? {
+        router: {
+          base: "/nuxt-tensorflow/",
+        },
+      }
+    : {};
+
 export default {
+  ...routerBase,
   mode: "universal",
   /*
    ** Headers of the page
