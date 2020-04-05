@@ -1,0 +1,19 @@
+{
+  "name": "nuxt-tensorflow",
+  "version": "1.0.0",
+  "description": "Tensorflow example for nuxtjs",
+  "author": "David, Shin",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@tensorflow/tfjs": "^1.7.2",
+    "ant-design-vue": "^1.1.10",
+    "nuxt": "^2.0.0"
+  },
+  "devDependencies": {}
+}
