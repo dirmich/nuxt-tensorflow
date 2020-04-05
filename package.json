@@ -3,18 +3,23 @@
   "version": "1.0.0",
   "description": "Tensorflow example for nuxtjs",
   "author": "David, Shin",
+  "homepage": "https://dirmich.github.io/nuxt-tensorflow/",
   "private": true,
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
-    "generate:sub": "cross-env USE_SUBFOLDER=true nuxt generate"
+    "genpage": "cross-env USE_SUBFOLDER=true nuxt generate && gh-pages -d dist",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@tensorflow/tfjs": "^1.7.2",
     "ant-design-vue": "^1.1.10",
     "nuxt": "^2.0.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "cross-env": "^7.0.2",
+    "gh-pages": "^2.2.0"
+  }
 }

@@ -3,12 +3,8 @@
     <div style="width: 60%;">
       <a-row>
         <h2>Training Data (x,y) pairs</h2>
-        <a-col :span="12">
-          X
-        </a-col>
-        <a-col :span="12">
-          Y
-        </a-col>
+        <a-col :span="12">X</a-col>
+        <a-col :span="12">Y</a-col>
       </a-row>
       <a-row v-for="(item, idx) in xval" :key="idx" :gutters="[10, 10]">
         <a-col :span="12">
@@ -25,11 +21,7 @@
       <a-row style="margin-top: 20px;">
         <a-col>
           <h2>Predicting</h2>
-          <a-input
-            v-model="toPredict"
-            type="number"
-            placeholder="Enter an integer number"
-          />
+          <a-input v-model="toPredict" type="number" placeholder="Enter an integer number" />
           <div>{{ predictedVal }}</div>
           <a-button @click="predict" :disabled="!trained">Predict</a-button>
         </a-col>
@@ -49,7 +41,7 @@ export default {
       toPredict: "",
       predictedVal: "",
       trained: false,
-      model: {},
+      model: {}
     };
   },
   methods: {
@@ -58,12 +50,12 @@ export default {
       this.yval.push(0);
     },
     train() {
-      const model = (this.model = tf.sequential());
+      const model = tf.sequential();
       model.add(tf.layers.dense({ units: 1, inputShape: [1] }));
       model.compile({
-        loss: tf.losses.meanSquaredError,
-        optimizer: tf.train.sgd(),
-        metrics: ["mse"],
+        loss: "meanSquaredError", //tf.losses.meanSquaredError,
+        optimizer: "sgd" //tf.train.sgd
+        // metrics: ["mse"]
       });
 
       const xs = tf.tensor2d(this.xval, [this.xval.length, 1]);
@@ -74,23 +66,23 @@ export default {
           epochs: 100,
           callbacks: {
             onEpochEnd: (epoch, log) =>
-              console.log(`Epoch ${epoch}: loss=${log.loss}`),
-          },
+              console.log(`Epoch ${epoch}: loss=${log.loss}`, log)
+          }
         })
         .then(() => {
           this.trained = true;
           this.predictedVal = "Ready for making prediction";
         });
-      // this.model = model;
+      this.model = model;
     },
-    predict() {
-      const predicted = this.model.predict(
-        tf.tensor2d([parseInt(this.toPredict)], [1, 1])
-      );
-      console.log(tf.tensor2d([parseInt(this.toPredict)], [1, 1]));
-      this.predictedVal = predicted.print();
-    },
-  },
+    async predict() {
+      const input = parseInt(this.toPredict);
+      const predicted = this.model.predict(tf.tensor2d([input], [1, 1]));
+      // console.log(tf.tensor2d([parseInt(this.toPredict)], [1, 1]));
+      console.log(predicted.arraySync(), predicted.toFloat());
+      this.predictedVal = predicted.arraySync()[0];
+    }
+  }
 };
 </script>
 
