@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <div style="width: 60%;">
+      <logo />
       <a-row>
         <h2>Training Data (x,y) pairs</h2>
         <a-col :span="12">X</a-col>
@@ -21,7 +22,11 @@
       <a-row style="margin-top: 20px;">
         <a-col>
           <h2>Predicting</h2>
-          <a-input v-model="toPredict" type="number" placeholder="Enter an integer number" />
+          <a-input
+            v-model="toPredict"
+            type="number"
+            placeholder="Enter an integer number"
+          />
           <div>{{ predictedVal }}</div>
           <a-button @click="predict" :disabled="!trained">Predict</a-button>
         </a-col>
@@ -32,8 +37,11 @@
 
 <script>
 import * as tf from "@tensorflow/tfjs";
-
+import Logo from "@/components/Logo";
 export default {
+  components: {
+    Logo,
+  },
   data() {
     return {
       xval: [1, 2, 3, 4],
@@ -41,7 +49,7 @@ export default {
       toPredict: "",
       predictedVal: "",
       trained: false,
-      model: {}
+      model: {},
     };
   },
   methods: {
@@ -54,7 +62,7 @@ export default {
       model.add(tf.layers.dense({ units: 1, inputShape: [1] }));
       model.compile({
         loss: "meanSquaredError", //tf.losses.meanSquaredError,
-        optimizer: "sgd" //tf.train.sgd
+        optimizer: "sgd", //tf.train.sgd
         // metrics: ["mse"]
       });
 
@@ -66,8 +74,8 @@ export default {
           epochs: 100,
           callbacks: {
             onEpochEnd: (epoch, log) =>
-              console.log(`Epoch ${epoch}: loss=${log.loss}`, log)
-          }
+              console.log(`Epoch ${epoch}: loss=${log.loss}`, log),
+          },
         })
         .then(() => {
           this.trained = true;
@@ -81,8 +89,8 @@ export default {
       // console.log(tf.tensor2d([parseInt(this.toPredict)], [1, 1]));
       console.log(predicted.arraySync(), predicted.toFloat());
       this.predictedVal = predicted.arraySync()[0];
-    }
-  }
+    },
+  },
 };
 </script>
 
