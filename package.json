@@ -10,7 +10,7 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
-    "genpage": "cross-env USE_SUBFOLDER=true nuxt generate && gh-pages -d dist",
+    "predeploy": "cross-env USE_SUBFOLDER=true nuxt generate",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
