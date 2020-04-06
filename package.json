@@ -11,7 +11,7 @@
     "start": "nuxt start",
     "generate": "nuxt generate",
     "predeploy": "cross-env USE_SUBFOLDER=true nuxt generate",
-    "deploy": "gh-pages -d dist"
+    "deploy": "push-dir --dir=dist --branch=gh-pages --verbose"
   },
   "dependencies": {
     "@tensorflow/tfjs": "^1.7.2",
@@ -19,7 +19,6 @@
     "nuxt": "^2.0.0"
   },
   "devDependencies": {
-    "cross-env": "^7.0.2",
-    "gh-pages": "^2.2.0"
+    "cross-env": "^7.0.2"
   }
 }

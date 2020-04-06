@@ -1,11 +1,11 @@
 const routerBase =
-  process.env.USE_SUBFOLDER === "true" ?
-  {
-    router: {
-      base: "/nuxt-tensorflow/",
-    },
-  } :
-  {};
+  process.env.USE_SUBFOLDER === "true"
+    ? {
+        router: {
+          base: "/nuxt-tensorflow/",
+        },
+      }
+    : {};
 
 export default {
   ...routerBase,
@@ -15,12 +15,13 @@ export default {
    */
   head: {
     title: process.env.npm_package_name || "",
-    meta: [{
-        charset: "utf-8"
+    meta: [
+      {
+        charset: "utf-8",
       },
       {
         name: "viewport",
-        content: "width=device-width, initial-scale=1"
+        content: "width=device-width, initial-scale=1",
       },
       {
         hid: "description",
@@ -28,17 +29,19 @@ export default {
         content: process.env.npm_package_description || "",
       },
     ],
-    link: [{
-      rel: "icon",
-      type: "image/x-icon",
-      href: "/favicon.ico"
-    }],
+    link: [
+      {
+        rel: "icon",
+        type: "image/x-icon",
+        href: "/favicon.ico",
+      },
+    ],
   },
   /*
    ** Customize the progress-bar color
    */
   loading: {
-    color: "#fff"
+    color: "#fff",
   },
   /*
    ** Global CSS
@@ -64,6 +67,7 @@ export default {
      ** You can extend webpack config here
      */
     vendor: ["@tensorflow/tfjs"],
+    maxChunkSize: 300000,
     extend(config, ctx) {},
   },
 };

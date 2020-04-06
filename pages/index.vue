@@ -74,7 +74,7 @@ export default {
           epochs: 100,
           callbacks: {
             onEpochEnd: (epoch, log) =>
-              console.log(`Epoch ${epoch}: loss=${log.loss}`, log),
+              (this.predictedVal = `Epoch ${epoch}: loss=${log.loss}`),
           },
         })
         .then(() => {
@@ -87,7 +87,7 @@ export default {
       const input = parseInt(this.toPredict);
       const predicted = this.model.predict(tf.tensor2d([input], [1, 1]));
       // console.log(tf.tensor2d([parseInt(this.toPredict)], [1, 1]));
-      console.log(predicted.arraySync(), predicted.toFloat());
+      // console.log(predicted.arraySync(), predicted.toFloat());
       this.predictedVal = predicted.arraySync()[0];
     },
   },
