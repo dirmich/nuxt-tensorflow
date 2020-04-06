@@ -9,10 +9,10 @@
       </a-row>
       <a-row v-for="(item, idx) in xval" :key="idx" :gutters="[10, 10]">
         <a-col :span="12">
-          <a-input v-model="xval[idx]" type="number" />
+          <a-input v-model.number="xval[idx]" type="number" />
         </a-col>
         <a-col :span="12">
-          <a-input v-model="yval[idx]" type="number" />
+          <a-input v-model.number="yval[idx]" type="number" />
         </a-col>
       </a-row>
       <div style="margin-top: 20px;">
@@ -23,7 +23,7 @@
         <a-col>
           <h2>Predicting</h2>
           <a-input
-            v-model="toPredict"
+            v-model.number="toPredict"
             type="number"
             placeholder="Enter an integer number"
           />
@@ -84,8 +84,10 @@ export default {
       this.model = model;
     },
     async predict() {
-      const input = parseInt(this.toPredict);
-      const predicted = this.model.predict(tf.tensor2d([input], [1, 1]));
+      // const input = (this.toPredict);
+      const predicted = this.model.predict(
+        tf.tensor2d([this.toPredict], [1, 1])
+      );
       // console.log(tf.tensor2d([parseInt(this.toPredict)], [1, 1]));
       // console.log(predicted.arraySync(), predicted.toFloat());
       this.predictedVal = predicted.arraySync()[0];
